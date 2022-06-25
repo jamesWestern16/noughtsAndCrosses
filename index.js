@@ -36,7 +36,8 @@ function hasWon() {
 }
 
 
-console.log(grid);
+console.log('', grid[0], '\n', grid[1], '\n', grid[2]);
+
 
 let won = false
 while (won === false){
@@ -52,6 +53,14 @@ while (won === false){
         console.log("You win!");
     }
 }
+
+// Working notes: POA:
+// 1. Setup github account [DONE]
+// 2. Get console log to createa grid in node
+// 3. create working win and draw conditions to close out while loop
+// 4. Setup player X and player O
+// 
+
 
     // if (userChoice === randomNumber){
     //     console.log("You win!");

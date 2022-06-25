@@ -31,6 +31,24 @@ function hasWon() {
     }
     if (grid[1][0] === "x" && grid[1][1] === "x" && grid[1][2] === "x") {
         return true;
+    }    
+    if (grid[2][0] === "x" && grid[2][1] === "x" && grid[2][2] === "x") {
+        return true;
+    }
+    if (grid[0][0] === "x" && grid[1][0] === "x" && grid[2][0] === "x") {
+        return true;
+    }    
+    if (grid[0][1] === "x" && grid[1][1] === "x" && grid[2][1] === "x") {
+        return true;
+    }
+    if (grid[0][2] === "x" && grid[1][2] === "x" && grid[2][2] === "x") {
+        return true;
+    }
+    if (grid[0][0] === "x" && grid[1][1] === "x" && grid[2][2] === "x") {
+        return true;
+    }
+    if (grid[2][0] === "x" && grid[1][1] === "x" && grid[0][2] === "x") {
+        return true;
     }
     return false;
 }
@@ -47,7 +65,7 @@ while (won === false){
     column = Number(column);
     
     grid[row - 1][column - 1] = 'x';
-    console.log(grid);
+    console.log('', grid[0], '\n', grid[1], '\n', grid[2]);
     let won = hasWon();
     if (won) {
         console.log("You win!");
@@ -56,8 +74,8 @@ while (won === false){
 
 // Working notes: POA:
 // 1. Setup github account [DONE]
-// 2. Get console log to createa grid in node
-// 3. create working win and draw conditions to close out while loop
+// 2. Get console log to create a 3 line grid in node [DONE]
+// 3. create working win and draw conditions to close out while loop [Not closing out while loop?]
 // 4. Setup player X and player O
 // 
 

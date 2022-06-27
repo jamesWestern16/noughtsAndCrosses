@@ -64,7 +64,7 @@ function hasWon(character) {
 // }
 
 function drawGrid() {
-    console.log('', grid[0], '\n', grid[1], '\n', grid[2]);    
+    console.log('\n', grid[0], '\n', grid[1], '\n', grid[2], '\n');    
 }
 
 drawGrid();
@@ -85,10 +85,10 @@ drawGrid();
 //     }
 // }
 // // [ORIGINAL]
-
-let playerCharacter = "X"
-let won = false
-while (won === false){
+let goesTaken = 0;
+let playerCharacter = "X";
+let finished = false;
+while (finished === false) {
     // if (playerCharacter === "X") {
     //     playerCharacter = "O";
     // } else {
@@ -104,14 +104,18 @@ while (won === false){
         drawGrid();
         if (hasWon(playerCharacter) === true) {
             console.log(`Player ${playerCharacter} wins!`);
-            won = true;
+            finished = true;
         }
         playerCharacter = playerCharacter === "X" ? "O" : "X";
+        // goesTaken = goesTaken + 1;
+        goesTaken += 1;
+        if (goesTaken === 9) {
+            console.log("It's a draw!");
+            finished = true;
+        }
     } else {
         console.log("Space already taken");
-
     }
-   
 }
     
    

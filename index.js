@@ -25,73 +25,49 @@ let grid = [
 // // grid[row - 1][column - 1] = 'x';
 
 // console.log(grid);
-function hasWonX() {
-    if (grid[0][0] === "x" && grid[0][1] === "x" && grid[0][2] === "x") {
+function hasWon(character) {
+    if (grid[0][0] === character && grid[0][1] === character && grid[0][2] === character) {
         return true;
     }
-    if (grid[1][0] === "x" && grid[1][1] === "x" && grid[1][2] === "x") {
+    if (grid[1][0] === character && grid[1][1] === character && grid[1][2] === character) {
         return true;
     }    
-    if (grid[2][0] === "x" && grid[2][1] === "x" && grid[2][2] === "x") {
+    if (grid[2][0] === character && grid[2][1] === character && grid[2][2] === character) {
         return true;
     }
-    if (grid[0][0] === "x" && grid[1][0] === "x" && grid[2][0] === "x") {
+    if (grid[0][0] === character && grid[1][0] === character && grid[2][0] === character) {
         return true;
     }    
-    if (grid[0][1] === "x" && grid[1][1] === "x" && grid[2][1] === "x") {
+    if (grid[0][1] === character && grid[1][1] === character && grid[2][1] === character) {
         return true;
     }
-    if (grid[0][2] === "x" && grid[1][2] === "x" && grid[2][2] === "x") {
+    if (grid[0][2] === character && grid[1][2] === character && grid[2][2] === character) {
         return true;
     }
-    if (grid[0][0] === "x" && grid[1][1] === "x" && grid[2][2] === "x") {
+    if (grid[0][0] === character && grid[1][1] === character && grid[2][2] === character) {
         return true;
     }
-    if (grid[2][0] === "x" && grid[1][1] === "x" && grid[0][2] === "x") {
-        return true;
-    }
-    return false;
-}
-
-function hasWonO() {
-    if (grid[0][0] === "O" && grid[0][1] === "O" && grid[0][2] === "O") {
-        return true;
-    }
-    if (grid[1][0] === "O" && grid[1][1] === "O" && grid[1][2] === "O") {
-        return true;
-    }    
-    if (grid[2][0] === "O" && grid[2][1] === "O" && grid[2][2] === "O") {
-        return true;
-    }
-    if (grid[0][0] === "O" && grid[1][0] === "O" && grid[2][0] === "O") {
-        return true;
-    }    
-    if (grid[0][1] === "O" && grid[1][1] === "O" && grid[2][1] === "O") {
-        return true;
-    }
-    if (grid[0][2] === "O" && grid[1][2] === "O" && grid[2][2] === "O") {
-        return true;
-    }
-    if (grid[0][0] === "O" && grid[1][1] === "O" && grid[2][2] === "O") {
-        return true;
-    }
-    if (grid[2][0] === "O" && grid[1][1] === "O" && grid[0][2] === "O") {
+    if (grid[2][0] === character && grid[1][1] === character && grid[0][2] === character) {
         return true;
     }
     return false;
 }
 
 function finalWin() {
-    if (hasWonO) {
+    if (hasWon("O")) {
         return true;
     }
-    if (hasWonX) {
+    if (hasWon("X")) {
         return true;
     }
     return false;
 }
 
-console.log('', grid[0], '\n', grid[1], '\n', grid[2]);
+function drawGrid() {
+    console.log('', grid[0], '\n', grid[1], '\n', grid[2]);    
+}
+
+drawGrid();
 
 // [ORIGINAL]
 // let won = false
@@ -119,7 +95,7 @@ while (won === false){
     column = Number(column);
     
     grid[row - 1][column - 1] = 'x';
-    console.log('', grid[0], '\n', grid[1], '\n', grid[2]);
+    drawGrid();
     if (hasWonX === true) {
         console.log("Player X wins!");
     }
@@ -130,7 +106,7 @@ while (won === false){
     column1 = Number(column1);
     
     grid[row1 - 1][column1 - 1] = 'O';
-    console.log('', grid[0], '\n', grid[1], '\n', grid[2]);
+    drawGrid();
     if (hasWonO === true) {
         console.log("Player O wins!");
     }
@@ -154,7 +130,7 @@ while (won === false){
 // 2. Need to add draw condition
 // 3. Not giving win message now - because need a cariable as well as a function
 // 4. Block out already chosen spaces in grid and return to prompt for error input (not 0,1 or 2)
-
+// 
 
     // if (userChoice === randomNumber){
     //     console.log("You win!");

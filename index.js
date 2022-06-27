@@ -53,15 +53,15 @@ function hasWon(character) {
     return false;
 }
 
-function finalWin() {
-    if (hasWon("O")) {
-        return true;
-    }
-    if (hasWon("X")) {
-        return true;
-    }
-    return false;
-}
+// function finalWin() {
+//     if (hasWon("O")) {
+//         return true;
+//     }
+//     if (hasWon("X")) {
+//         return true;
+//     }
+//     return false;
+// }
 
 function drawGrid() {
     console.log('', grid[0], '\n', grid[1], '\n', grid[2]);    
@@ -86,31 +86,28 @@ drawGrid();
 // }
 // // [ORIGINAL]
 
-
+let playerCharacter = "X"
 let won = false
 while (won === false){
-    let row = prompt('Player X, which row would you like to choose?');
-    let column = prompt('Player X, which column would you like to choose?');
+    if (playerCharacter === "X") {
+        playerCharacter = "O";
+    } else {
+        playerCharacter = "X";
+    }
+    
+    let row = prompt(`Player ${playerCharacter}, which row would you like to choose?`);
+    let column = prompt('Player ' + playerCharacter + ', which column would you like to choose?');
     row = Number(row);
     column = Number(column);
     
-    grid[row - 1][column - 1] = 'x';
+    grid[row - 1][column - 1] = playerCharacter;
     drawGrid();
-    if (hasWonX === true) {
-        console.log("Player X wins!");
+    if (hasWon(playerCharacter) === true) {
+        console.log(`Player ${playerCharacter} wins!`);
+        won = true;
     }
     
-    let row1 = prompt('Player O, which row would you like to choose?');
-    let column1 = prompt('Player O, which column would you like to choose?');
-    row1 = Number(row1);
-    column1 = Number(column1);
-    
-    grid[row1 - 1][column1 - 1] = 'O';
-    drawGrid();
-    if (hasWonO === true) {
-        console.log("Player O wins!");
-    }
-    let won = finalWin;
+   
 }
 
 

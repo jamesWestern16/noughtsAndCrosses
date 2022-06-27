@@ -89,26 +89,33 @@ drawGrid();
 let playerCharacter = "X"
 let won = false
 while (won === false){
-    if (playerCharacter === "X") {
-        playerCharacter = "O";
-    } else {
-        playerCharacter = "X";
-    }
+    // if (playerCharacter === "X") {
+    //     playerCharacter = "O";
+    // } else {
+    //     playerCharacter = "X";
+    // }
     
     let row = prompt(`Player ${playerCharacter}, which row would you like to choose?`);
     let column = prompt('Player ' + playerCharacter + ', which column would you like to choose?');
     row = Number(row);
     column = Number(column);
-    
-    grid[row - 1][column - 1] = playerCharacter;
-    drawGrid();
-    if (hasWon(playerCharacter) === true) {
-        console.log(`Player ${playerCharacter} wins!`);
-        won = true;
+    if (grid[row - 1][column - 1] === "-") {
+        grid[row - 1][column - 1] = playerCharacter;
+        drawGrid();
+        if (hasWon(playerCharacter) === true) {
+            console.log(`Player ${playerCharacter} wins!`);
+            won = true;
+        }
+        playerCharacter = playerCharacter === "X" ? "O" : "X";
+    } else {
+        console.log("Space already taken");
+
     }
-    
    
 }
+    
+   
+
 
 
 // Working notes: POA:

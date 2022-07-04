@@ -90,8 +90,8 @@ let finished = false;
 
 let playerCharacter = prompt("Which player would like to start, X or O?");
 if (playerCharacter !== "X" && playerCharacter !== "O" ) {
-    console.log("No player selected, player X will start");
-    playerCharacter = "X";
+    playerCharacter = Math.random() < 0.5 ? "X" : "O";
+    console.log(`No player selected, player ${playerCharacter} will start`);
 }
 
 while (finished === false) {

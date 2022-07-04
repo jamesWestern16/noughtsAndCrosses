@@ -88,6 +88,7 @@ drawGrid();
 let goesTaken = 0;
 let playerCharacter = "X";
 let finished = false;
+
 while (finished === false) {
     // if (playerCharacter === "X") {
     //     playerCharacter = "O";
@@ -97,32 +98,43 @@ while (finished === false) {
     
     let row = prompt(`Player ${playerCharacter}, which row would you like to choose?`);
     let column = prompt('Player ' + playerCharacter + ', which column would you like to choose?');
+    if (row === "exit") {
+        finished = true;
+        continue;
+    }
     row = Number(row);
     column = Number(column);
-    if (grid[row - 1][column - 1] === "-") {
-        grid[row - 1][column - 1] = playerCharacter;
-        drawGrid();
-        if (hasWon(playerCharacter) === true) {
-            console.log(`Player ${playerCharacter} wins!`);
-            finished = true;
-        }
-        playerCharacter = playerCharacter === "X" ? "O" : "X";
-        // goesTaken = goesTaken + 1;
-        goesTaken += 1;
-        if (goesTaken === 9) {
-            console.log("It's a draw!");
-            finished = true;
+    
+    if ((row !== 1 && row !== 2 && row !== 3) || (column !== 1 && column !== 2 && column !== 3)) {
+        console.log("Please choose a row and column between 1 and 3");
+        continue;
+    }
+    let selectedGridSpace = grid[row - 1][column - 1];
+    if (selectedGridSpace === "-" || selectedGridSpace === "X" || selectedGridSpace === "O") {
+        
+        if (selectedGridSpace === "-") {
+            grid[row - 1][column - 1] = playerCharacter;
+            drawGrid();
+            if (hasWon(playerCharacter) === true) {
+                console.log(`Player ${playerCharacter} wins!`);
+                finished = true;
+            }
+            playerCharacter = playerCharacter === "X" ? "O" : "X";
+            // goesTaken = goesTaken + 1;
+            goesTaken += 1;
+            if (goesTaken === 9) {
+                console.log("It's a draw!");
+                finished = true;
+            }
+        } else {
+            console.log("Space already taken");
         }
     } else {
-        console.log("Space already taken");
+        console.log("Please choose a row and column between 1 and 3");
     }
 }
     
-   
-
-
-
-// Working notes: POA:
+   // Working notes: POA:
 // 1. Setup github account [DONE]
 // 2. Get console log to create a 3 line grid in node [DONE]
 // 3. create working win and draw conditions to close out while loop [Not closing out while loop?]
@@ -148,3 +160,10 @@ while (finished === false) {
     // } else if (userChoice > randomNumber){
     //     console.log("Too high");
     // }
+
+
+    // 1. Make not break if wrong row or column entered
+    // 2. Let players choose who goes first - only X or O (include lower case and no space etc.)
+    // 3. Ascii art grid (Bonus)
+
+

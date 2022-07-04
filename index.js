@@ -86,8 +86,13 @@ drawGrid();
 // }
 // // [ORIGINAL]
 let goesTaken = 0;
-let playerCharacter = "X";
 let finished = false;
+
+let playerCharacter = prompt("Which player would like to start, X or O?");
+if (playerCharacter !== "X" && playerCharacter !== "O" ) {
+    console.log("No player selected, player X will start");
+    playerCharacter = "X";
+}
 
 while (finished === false) {
     // if (playerCharacter === "X") {

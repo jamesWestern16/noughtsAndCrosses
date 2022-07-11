@@ -1,59 +1,199 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>Noughts and Crosses</title>
+  <title>Noughts and Crosses</title>
 </head>
+
 <body>
 
-    <h1>Noughts and Crosses</h1>
-    <h2>Who is smarter?</h2>
-    <p>Best played with a friend</p>
+  <h1>Noughts and Crosses</h1>
+  <h2>Who is smarter?</h2>
+  <p>Best played with a friend</p>
 
-    <table>
-        <tr>
-          <td>X</td>
-          <td>-</td>
-          <td>O</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>X</td>
-          <td>-</td>
-        </tr>
-        <tr>
-          <td>-</td>
-          <td>-</td>
-          <td>X</td>
-        </tr>
-      </table>
+  <table>
+    <tr>
+      <td id="ox-1" class="ox-cell">-</td>
+      <td id="ox-2" class="ox-cell">-</td>
+      <td id="ox-3" class="ox-cell">-</td>
+    </tr>
+    <tr>
+      <td id="ox-4" class="ox-cell">-</td>
+      <td id="ox-5" class="ox-cell">-</td>
+      <td id="ox-6" class="ox-cell">-</td>
+    </tr>
+    <tr>
+      <td id="ox-7" class="ox-cell">-</td>
+      <td id="ox-8" class="ox-cell">-</td>
+      <td id="ox-9" class="ox-cell">-</td>
+    </tr>
+  </table>
 
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
+  <img id="win-image" src="">
+
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    h1 {
+      color: blue;
+      text-decoration: underline;
+      text-decoration-color: yellow;
+    }
+
+    td {
+      border: 1px solid white;
+      width: 50px;
+      height: 50px;
+      border-collapse: collapse;
+      background-color: #96D4D4;
+      text-align: center;
+      font-size: 30px;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    p {
+      color: red;
+      font-weight: bold;
+      border: 2px dotted green;
+    }
+  </style>
+  <script>
+    function onWin() {
+      console.log(`Player ${playerCharacter} wins!`);
+      finished = true;
+      const element = document.getElementById("win-image");
+      element.src = "https://blogs.brighton.ac.uk/careers/files/2022/02/win-750x360.jpg"
+    }
+
+    function setGridPosition(id) {
+      switch (id) {
+        case "ox-1":
+          row = 0;
+          column = 0;
+          break;
+        case "ox-2":
+          row = 0;
+          column = 1;
+          break;
+        case "ox-3":
+          row = 0;
+          column = 2;
+          break;
+        case "ox-4":
+          row = 1;
+          column = 0;
+          break;
+        case "ox-5":
+          row = 1;
+          column = 1;
+          break;
+        case "ox-6":
+          row = 1;
+          column = 2;
+          break;
+        case "ox-7":
+          row = 2;
+          column = 0;
+          break;
+        case "ox-8":
+          row = 2;
+          column = 1;
+          break;
+        case "ox-9":
+          row = 2;
+          column = 2;
+          break;
+      }
+    }
+
+    let grid = [
+      ["-", "-", "-"],
+      ["-", "-", "-"],
+      ["-", "-", "-"],
+    ]
+
+    function hasWon(character) {
+      if (grid[0][0] === character && grid[0][1] === character && grid[0][2] === character) {
+        return true;
+      }
+      if (grid[1][0] === character && grid[1][1] === character && grid[1][2] === character) {
+        return true;
+      }
+      if (grid[2][0] === character && grid[2][1] === character && grid[2][2] === character) {
+        return true;
+      }
+      if (grid[0][0] === character && grid[1][0] === character && grid[2][0] === character) {
+        return true;
+      }
+      if (grid[0][1] === character && grid[1][1] === character && grid[2][1] === character) {
+        return true;
+      }
+      if (grid[0][2] === character && grid[1][2] === character && grid[2][2] === character) {
+        return true;
+      }
+      if (grid[0][0] === character && grid[1][1] === character && grid[2][2] === character) {
+        return true;
+      }
+      if (grid[2][0] === character && grid[1][1] === character && grid[0][2] === character) {
+        return true;
+      }
+      return false;
+    }
+
+    let goesTaken = 0;
+    let finished = false;
+    let row;
+    let column;
+    let playerCharacter = "O";
+
+
+    const cells = document.getElementsByClassName('ox-cell');
+    for (let i = 0; i < cells.length; i++) {
+      console.log(i);
+      cells[i].style.backgroundColor = "red";
+      cells[i].addEventListener('click', function () {
+        if (finished === true) {
+          return;
         }
-        
-        h1 {
-            color: blue;
-            text-decoration: underline;     
-            text-decoration-color: yellow;  
+        let id = cells[i].id;
+        setGridPosition(id);
+
+
+        let selectedGridSpace = grid[row][column];
+
+
+        if (selectedGridSpace === "-") {
+          grid[row][column] = playerCharacter;
+          cells[i].textContent = playerCharacter;
+          if (hasWon(playerCharacter) === true) {
+            onWin();
+          }
+          playerCharacter = playerCharacter === "X" ? "O" : "X";
+          // goesTaken = goesTaken + 1;
+          goesTaken += 1;
+          if (goesTaken === 9) {
+            console.log("It's a draw!");
+            finished = true;
+          }
+        } else {
+          console.log("Space already taken");
         }
-        td {
-            border: 1px solid white;
-            width: 50px;
-            height: 50px;
-            border-collapse: collapse;
-            background-color: #96D4D4;
-            text-align: center;
-            font-size: 30px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-        p{
-            color: red;
-            font-weight: bold;
-            border: 2px dotted green;
-        }
-    </style>
-    <script>
-    </script>
+      });
+    }
+
+
+
+
+
+      // const cell1 = document.getElementById("ox-1");
+      // cell1.addEventListener('mouseover', function handleClick() {
+      //     cell1.textContent = 'X';
+      //   });
+      // const cell2 = document.getElementById("ox-2");
+      // cell2.addEventListener('mouseover', monkey);
+  </script>
 </body>
+
 </html>
